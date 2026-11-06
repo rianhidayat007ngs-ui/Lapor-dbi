@@ -1,0 +1,24 @@
+{
+  "name": "Lapor DBI Batam",
+  "short_name": "Lapor DBI",
+  "description": "Laporkan informasi keimigrasian dari Desa Binaan Imigrasi ke Petugas Imigrasi Pembina Desa, Kantor Imigrasi Kelas I Khusus TPI Batam.",
+  "lang": "id",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#13284a",
+  "theme_color": "#13284a",
+  "categories": ["government", "utilities"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Lapor - Tanjung Sengkuang", "url": "./#tanjung-sengkuang" },
+    { "name": "Lapor - Sungai Pelunggut", "url": "./#sungai-pelunggut" },
+    { "name": "Lapor - Sungai Lekop", "url": "./#sungai-lekop" }
+  ]
+}

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#13284a">
+<meta name="description" content="Laporkan informasi keimigrasian dari Desa Binaan Imigrasi ke petugas Kantor Imigrasi Kelas I Khusus TPI Batam.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lapor DBI">
+<title>Lapor DBI Batam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: satu kolom ramah HP; langkah bernomor 1-4 dari atas ke bawah, tombol kirim menempel di bawah */
+  --navy: #13284a;
+  --brass: #b8892b;
+  --paper: #f5f6f8;
+  --card: #ffffff;
+  --ink: #1b2330;
+  --muted: #5d6878;
+  --line: #d9dee6;
+  --wa: #1f8f4e;
+  --danger: #b4372f;
+  --focus: #2f6fd6;
+  --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #9db8e6; --brass: #d9ab4e; --paper: #0f1622; --card: #182233; --ink: #e8ecf2;
+    --muted: #a3afc0; --line: #2c3a50; --wa: #3cbf74; --danger: #ef7d73; --focus: #7aa7ff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --navy: #9db8e6; --brass: #d9ab4e; --paper: #0f1622; --card: #182233; --ink: #e8ecf2;
+  --muted: #a3afc0; --line: #2c3a50; --wa: #3cbf74; --danger: #ef7d73; --focus: #7aa7ff; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 17px/1.5 var(--body); }
+.wrap { max-width: 640px; margin: 0 auto; padding: 0 16px 120px; }
+header.top { background: #13284a; color: #fff; }
+header.top .wrap { padding-top: calc(20px + env(safe-area-inset-top)); padding-bottom: 22px; display: grid; gap: 6px; }
+.agency { font: 600 12px/1.3 var(--body); letter-spacing: .06em; text-transform: uppercase; color: #d9c08a; }
+h1 { font: 800 26px/1.15 var(--display); margin: 0; text-wrap: balance; }
+.lede { margin: 0; color: #cfd8e6; max-width: 60ch; }
+.notice { margin-top: 16px; display: grid; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--danger); }
+.notice b { color: var(--danger); }
+section.step { margin-top: 22px; display: grid; gap: 12px; }
+.step-h { display: flex; gap: 10px; align-items: baseline; }
+.step-n { font: 800 14px/1 var(--display); color: var(--brass); min-width: 22px; }
+h2 { font: 700 19px/1.25 var(--display); margin: 0; color: var(--ink); }
+.hint { margin: 0; color: var(--muted); font-size: 15px; }
+.choices { display: grid; gap: 8px; }
+.choice { position: relative; display: block; }
+.choice input { position: absolute; opacity: 0; inset: 0; }
+.choice span { display: grid; gap: 2px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--card); cursor: pointer; }
+.choice b { font-weight: 700; }
+.choice small { color: var(--muted); font-size: 14px; line-height: 1.35; }
+.choice input:checked + span { border-color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--navy); }
+.choice input:checked + span b::before { content: "\2713  "; color: var(--brass); }
+.choice input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.field { display: grid; gap: 6px; }
+label.l { font-weight: 700; }
+label.l em { font-style: normal; font-weight: 400; color: var(--muted); }
+input[type=text], input[type=tel], textarea {
+  width: 100%; font: inherit; color: var(--ink); background: var(--card);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 12px;
+}
+textarea { min-height: 120px; resize: vertical; }
+input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.toggle { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; background: var(--card); border: 1.5px solid var(--line); border-radius: 10px; }
+.toggle input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: #13284a; flex: none; }
+.preview { white-space: pre-wrap; font: 14px/1.5 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; background: var(--card); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; overflow-x: auto; color: var(--ink); }
+.err { color: var(--danger); font-weight: 600; margin: 0; }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--card); border-top: 1px solid var(--line); }
+.bar .wrap { padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 17px/1 var(--body); border-radius: 10px; padding: 14px 18px; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; }
+.btn-wa { background: var(--wa); color: #fff; flex: 1 1 0; min-width: 0; }
+.btn-wa[aria-disabled="true"] { background: var(--line); color: var(--muted); pointer-events: none; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.after { font-size: 14px; color: var(--muted); margin: 0; flex-basis: 100%; }
+.tips { margin-top: 28px; padding: 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); display: grid; gap: 8px; }
+.tips h2 { font-size: 17px; }
+.tips ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; color: var(--ink); }
+.install { margin-top: 16px; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brass); }
+.install p { margin: 0; flex: 1; font-size: 15px; }
+.install button { font: 700 15px/1 var(--body); padding: 10px 14px; border-radius: 8px; border: 0; background: #13284a; color: #fff; cursor: pointer; }
+footer { margin-top: 20px; color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="agency">Kantor Imigrasi Kelas I Khusus TPI Batam</div>
+    <h1>Lapor ke Petugas Imigrasi Pembina Desa</h1>
+    <p class="lede">Lihat orang asing yang mencurigakan, ada ajakan kerja ke luar negeri yang tidak jelas, atau keberangkatan lewat jalur tidak resmi? Sampaikan di sini. Laporan dikirim langsung ke WhatsApp petugas.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="notice" role="note">
+    <span><b>Keadaan darurat?</b> Jika ada orang dalam bahaya, hubungi Polisi di <b>110</b> terlebih dahulu.</span>
+    <span>Identitas pelapor boleh dirahasiakan. Petugas hanya memakai laporan ini untuk keperluan dinas.</span>
+  </div>
+
+  <div class="install" id="install" hidden>
+    <p id="installText">Pasang aplikasi Lapor DBI di HP agar mudah dibuka kapan saja.</p>
+    <button type="button" id="installBtn">Pasang</button>
+  </div>
+
+  <form id="f" novalidate>
+    <section class="step" aria-labelledby="h1s">
+      <div class="step-h"><span class="step-n">1</span><h2 id="h1s">Kelurahan tempat kejadian</h2></div>
+      <div class="choices" id="desa"></div>
+    </section>
+
+    <section class="step" aria-labelledby="h2s">
+      <div class="step-h"><span class="step-n">2</span><h2 id="h2s">Apa yang ingin dilaporkan?</h2></div>
+      <div class="choices" id="jenis"></div>
+    </section>
+
+    <section class="step" aria-labelledby="h3s">
+      <div class="step-h"><span class="step-n">3</span><h2 id="h3s">Ceritakan kejadiannya</h2></div>
+      <div class="field">
+        <label class="l" for="uraian">Apa yang Anda lihat atau dengar?</label>
+        <textarea id="uraian" placeholder="Contoh: Sejak seminggu ini ada 5 orang asing tinggal di rumah kontrakan dan berangkat kerja setiap pagi naik mobil pikap."></textarea>
+      </div>
+      <div class="field">
+        <label class="l" for="lokasi">Lokasi <em>(RT/RW, nama jalan, patokan)</em></label>
+        <input type="text" id="lokasi" placeholder="Contoh: RT 02/RW 13, dekat masjid">
+      </div>
+      <div class="field">
+        <label class="l" for="waktu">Kapan terjadi? <em>(boleh perkiraan)</em></label>
+        <input type="text" id="waktu" placeholder="Contoh: Kamis malam, 5 November, sekitar jam 9">
+      </div>
+      <div class="field">
+        <label class="l" for="pihak">Orang yang terlibat <em>(tidak wajib)</em></label>
+        <input type="text" id="pihak" placeholder="Ciri-ciri, jumlah orang, kendaraan, nomor polisi">
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="h4s">
+      <div class="step-h"><span class="step-n">4</span><h2 id="h4s">Identitas pelapor</h2></div>
+      <label class="toggle" for="anon">
+        <input type="checkbox" id="anon">
+        <span>Rahasiakan nama dan nomor saya. Petugas tetap bisa membalas lewat WhatsApp yang Anda pakai.</span>
+      </label>
+      <div class="field" id="idfields">
+        <label class="l" for="nama">Nama <em>(tidak wajib)</em></label>
+        <input type="text" id="nama" autocomplete="name">
+        <label class="l" for="kontak">Nomor HP <em>(tidak wajib)</em></label>
+        <input type="tel" id="kontak" autocomplete="tel" inputmode="tel">
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="h5s">
+      <div class="step-h"><span class="step-n">&#10003;</span><h2 id="h5s">Pesan yang akan terkirim</h2></div>
+      <p class="hint">Periksa sekali lagi. Setelah tombol hijau ditekan, WhatsApp akan terbuka dengan pesan ini. Tekan kirim di WhatsApp, lalu lampirkan foto jika ada.</p>
+      <div class="preview" id="preview" aria-live="polite"></div>
+      <p class="err" id="err" hidden></p>
+    </section>
+  </form>
+
+  <aside class="tips" aria-labelledby="th">
+    <h2 id="th">Waspadai tanda-tanda berikut</h2>
+    <ul>
+      <li>Tawaran kerja ke luar negeri dengan gaji tinggi, tanpa kontrak dan tanpa pelatihan resmi.</li>
+      <li>Berangkat lewat pelabuhan kecil atau malam hari, paspor dipegang oleh orang lain.</li>
+      <li>Diminta mengaku "wisata" saat diperiksa petugas, padahal akan bekerja.</li>
+      <li>Orang asing tinggal atau bekerja di lingkungan Anda tanpa pernah melapor ke RT/RW.</li>
+    </ul>
+  </aside>
+
+  <footer>Program Desa Binaan Imigrasi &middot; Kantor Imigrasi Kelas I Khusus TPI Batam, Jalan Engku Putri No. 3 Batam Centre</footer>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="btn btn-wa" id="send" href="#" aria-disabled="true">Kirim lewat WhatsApp</a>
+    <button type="button" class="btn btn-ghost" id="copy">Salin pesan</button>
+    <p class="after" id="after"></p>
+  </div>
+</div>
+
+<script>
+// Nomor WhatsApp Pimpasa, format internasional tanpa tanda + (contoh 6281234567890)
+const WA_PIMPASA = "6281170000516";
+
+const DESA = [
+  { id: "tanjung-sengkuang", kode: "TSK", nama: "Tanjung Sengkuang", ket: "Kerawanan: perlintasan Pekerja Migran Indonesia" },
+  { id: "sungai-pelunggut", kode: "SPG", nama: "Sungai Pelunggut", ket: "Kerawanan: risiko TPPO dan TPPM" },
+  { id: "sungai-lekop", kode: "SLK", nama: "Sungai Lekop", ket: "Kerawanan: risiko TPPO dan TPPM" }
+];
+const JENIS = [
+  ["Orang asing mencurigakan", "Tinggal, bekerja, atau berkumpul tanpa kejelasan"],
+  ["Ajakan kerja ke luar negeri tidak resmi", "Calo, perekrut, atau tawaran kerja yang tidak jelas"],
+  ["Dugaan perdagangan orang (TPPO)", "Orang dijanjikan kerja lalu dipaksa, ditahan, atau dijual"],
+  ["Keberangkatan lewat jalur tidak resmi (TPPM)", "Penyeberangan ilegal, pelabuhan tikus, penyelundupan orang"],
+  ["Pemalsuan paspor atau dokumen", "Paspor, identitas, atau surat yang diduga palsu"],
+  ["Pertanyaan layanan paspor", "Cara membuat paspor, syarat, dan layanan keimigrasian"],
+  ["Lainnya", "Informasi lain yang berkaitan dengan keimigrasian"]
+];
+
+const $ = (id) => document.getElementById(id);
+const pad = (n) => String(n).padStart(2, "0");
+const now = new Date();
+const KODE_SUFFIX = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${String(now.getFullYear()).slice(2)}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+function radios(container, name, items) {
+  container.innerHTML = "";
+  items.forEach((it, i) => {
+    const lab = document.createElement("label");
+    lab.className = "choice";
+    const inp = document.createElement("input");
+    inp.type = "radio"; inp.name = name; inp.value = it.value; inp.id = `${name}-${i}`;
+    const sp = document.createElement("span");
+    const b = document.createElement("b"); b.textContent = it.title;
+    const s = document.createElement("small"); s.textContent = it.sub;
+    sp.append(b, s); lab.append(inp, sp); container.append(lab);
+  });
+}
+radios($("desa"), "desa", DESA.map(d => ({ value: d.id, title: "Kelurahan " + d.nama, sub: d.ket })));
+radios($("jenis"), "jenis", JENIS.map(([t, s]) => ({ value: t, title: t, sub: s })));
+
+function pickFromHash() {
+  const h = location.hash.replace("#", "");
+  const el = document.querySelector(`input[name=desa][value="${h}"]`);
+  if (el) el.checked = true;
+}
+pickFromHash();
+window.addEventListener("hashchange", () => { pickFromHash(); update(); });
+
+function val(id) { return $(id).value.trim(); }
+function checked(name) { const el = document.querySelector(`input[name=${name}]:checked`); return el ? el.value : ""; }
+
+function buildMessage() {
+  const d = DESA.find(x => x.id === checked("desa"));
+  const anon = $("anon").checked;
+  const kode = `DBI-${d ? d.kode : "XXX"}-${KODE_SUFFIX}`;
+  return [
+    "*LAPORAN WARGA DESA BINAAN IMIGRASI*",
+    `Kode: ${kode}`,
+    `Kelurahan: ${d ? d.nama : "-"}`,
+    `Jenis laporan: ${checked("jenis") || "-"}`,
+    `Waktu kejadian: ${val("waktu") || "-"}`,
+    `Lokasi: ${val("lokasi") || "-"}`,
+    `Pihak terlibat: ${val("pihak") || "-"}`,
+    `Uraian: ${val("uraian") || "-"}`,
+    `Pelapor: ${anon ? "Dirahasiakan" : (val("nama") || "-")}`,
+    `Kontak: ${anon ? "Dirahasiakan" : (val("kontak") || "-")}`,
+    "",
+    "Foto/bukti pendukung (jika ada) saya kirim setelah pesan ini."
+  ].join("\n");
+}
+
+function missing() {
+  const m = [];
+  if (!checked("desa")) m.push("kelurahan");
+  if (!checked("jenis")) m.push("jenis laporan");
+  if (val("uraian").length < 10) m.push("cerita kejadian (minimal satu kalimat)");
+  return m;
+}
+
+function update() {
+  const msg = buildMessage();
+  $("preview").textContent = msg;
+  const m = missing();
+  const send = $("send");
+  if (!WA_PIMPASA) {
+    send.setAttribute("aria-disabled", "true"); send.href = "#";
+    $("after").textContent = "Nomor WhatsApp petugas belum diatur. Gunakan Salin pesan lalu kirim ke petugas Imigrasi.";
+  } else if (m.length) {
+    send.setAttribute("aria-disabled", "true"); send.href = "#";
+    $("after").textContent = "Lengkapi dulu: " + m.join(", ") + ".";
+  } else {
+    send.removeAttribute("aria-disabled");
+    send.href = `https://wa.me/${WA_PIMPASA}?text=${encodeURIComponent(msg)}`;
+    $("after").textContent = `Nomor petugas: +${WA_PIMPASA}`;
+  }
+  $("idfields").hidden = $("anon").checked;
+}
+
+$("f").addEventListener("input", update);
+$("f").addEventListener("change", update);
+$("f").addEventListener("submit", (e) => e.preventDefault());
+$("copy").addEventListener("click", async () => {
+  const m = missing();
+  if (m.length) { $("err").hidden = false; $("err").textContent = "Lengkapi dulu: " + m.join(", ") + "."; return; }
+  $("err").hidden = true;
+  try {
+    await navigator.clipboard.writeText(buildMessage());
+    $("copy").textContent = "Tersalin";
+    setTimeout(() => { $("copy").textContent = "Salin pesan"; }, 2000);
+  } catch (e) {
+    $("err").hidden = false;
+    $("err").textContent = "Tidak bisa menyalin otomatis. Tekan lama pada kotak pesan di atas, lalu salin.";
+  }
+});
+update();
+
+// ---- Aplikasi terpasang (PWA) ----
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
+const standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault(); deferredPrompt = e;
+  if (!standalone) { $("install").hidden = false; $("installBtn").hidden = false; }
+});
+$("installBtn").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice.catch(() => {});
+  deferredPrompt = null; $("install").hidden = true;
+});
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+if (isIOS && !standalone) {
+  $("install").hidden = false; $("installBtn").hidden = true;
+  $("installText").textContent = "Pasang di iPhone: tekan tombol Bagikan di Safari, lalu pilih \"Tambahkan ke Layar Utama\".";
+}
+window.addEventListener("appinstalled", () => { $("install").hidden = true; });
+</script>
+</body>
+</html>
