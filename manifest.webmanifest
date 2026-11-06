@@ -8,7 +8,7 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#13284a",
+  "background_color": "#2b3550",
   "theme_color": "#13284a",
   "categories": ["government", "utilities"],
   "icons": [
